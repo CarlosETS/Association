@@ -32,7 +32,7 @@ User.create email: 'admin@admin.com', password: '111111', password_confirmation:
 end
 
 # Seed data
-100.times do
+1000.times do
   new_person = Person.new(
     name: Faker::Name.name,
     national_id: CPF.generate,
@@ -50,7 +50,7 @@ end
 end
 
 # Seed Debts
-100.times do
+1000.times do
   new_debt = Debt.new(
     person: Person.order("RANDOM()").first,
     amount: Faker::Number.decimal(l_digits: 2),

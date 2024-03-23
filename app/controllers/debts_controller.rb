@@ -3,7 +3,7 @@ class DebtsController < ApplicationController
 
   # GET /debts or /debts.json
   def index
-    @debts = Debt.all
+    @debts = Debt.includes('debt').all
   end
 
   # GET /debts/new
