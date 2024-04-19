@@ -1,39 +1,44 @@
-<%= link_to "< Voltar", people_path, class: 'btn btn-secondary btn-sm' %>
+<%= link_to people_path, class: 'btn btn-secondary btn-sm mb-2' do %>
+  <i class="bi bi-arrow-left"></i> Voltar
+<% end %>
 
-<div class="row mt-4">
-  <div class="col-6">
-    <%= form_with(model: person) do |form| %>
-      <% if person.errors.any? %>
-        <div class="alert alert-danger">
-          <ul>
-            <% person.errors.each do |error| %>
-              <li><%= error.full_message %></li>
-            <% end %>
-          </ul>
+
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <%= form_with(model: person, local: true) do |form| %>
+        <% if person.errors.any? %>
+          <div class="alert alert-danger">
+            <ul>
+              <% person.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="mb-3">
+          <%= form.label :name, "Nome", class: 'form-label' %>
+          <%= form.text_field :name, class: 'form-control' %>
         </div>
+
+        <div class="mb-3">
+          <%= form.label :phone_number, "Telefone", class: 'form-label' %>
+          <%= form.text_field :phone_number, class: 'form-control' %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :national_id, "CPF ou CNPJ", class: 'form-label' %>
+          <%= form.text_field :national_id, class: 'form-control' %>
+        </div>
+
+        <div class="form-check mb-3">
+          <%= form.check_box :active, class: 'form-check-input' %>
+          <%= form.label :active, 'Ativo', class: 'form-check-label' %>
+        </div>
+
+        <%= form.submit 'Salvar', class: 'btn btn-primary btn-lg' %>
       <% end %>
-
-      <div class="mb-3">
-        <%= form.label :name, "Nome", class: 'form-label' %>
-        <%= form.text_field :name, class: 'form-control' %>
-      </div>
-
-      <div class="mb-3">
-        <%= form.label :phone_number, "Telefone", class: 'form-label' %>
-        <%= form.text_field :phone_number, class: 'form-control' %>
-      </div>
-
-      <div class="mb-3">
-        <%= form.label :national_id, "CPF ou CNPJ", class: 'form-label' %>
-        <%= form.text_field :national_id, class: 'form-control' %>
-      </div>
-
-      <div class="form-check mb-3">
-        <%= form.check_box :active, class: 'form-check-input' %>
-        <%= form.label :active, 'Ativo', class: 'form-check-label' %>
-      </div>
-
-      <%= form.submit 'Salvar', class: 'btn btn-primary btn-lg' %>
-    <% end %>
+    </div>
   </div>
 </div>

@@ -32,6 +32,8 @@ gem "redis", ">= 4.0.1"
 
 gem 'faker'
 
+gem 'will_paginate-bootstrap'
+
 gem 'rails_performance'
 
 gem 'will_paginate', '~> 4.0'

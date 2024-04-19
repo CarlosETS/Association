@@ -9,8 +9,10 @@
 #   end
 
 User.destroy_all
+Payment.destroy_all
 Person.destroy_all
 Debt.destroy_all
+
 
 User.create email: 'admin@admin.com', password: '111111', password_confirmation: '111111'
 
@@ -19,7 +21,7 @@ User.create email: 'admin@admin.com', password: '111111', password_confirmation:
 # puts "111111"
 
 # Seed Users
-100.times do
+50.times do
   new_user = User.new(
     email: Faker::Internet.email,
     password: Faker::Internet.password
@@ -33,17 +35,13 @@ end
 
 # Seed data
 1000.times do
-  new_person = Person.new(
+  new_person = Person.create(
     name: Faker::Name.name,
     national_id: CPF.generate,
     phone_number: Faker::PhoneNumber.phone_number,
     active: Faker::Boolean.boolean,
-    user: User.order("RANDOM()").first,
-    created_at: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now),
-    updated_at: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)
+    user: User.order("RANDOM()").first
   )
-
-  new_person.save
 
   puts "Pessoa criada:"
   puts new_person.to_s
@@ -51,14 +49,23 @@ end
 
 # Seed Debts
 1000.times do
-  new_debt = Debt.new(
+  new_debt = Debt.create(
     person: Person.order("RANDOM()").first,
     amount: Faker::Number.decimal(l_digits: 2),
-    observation: Faker::Lorem.sentence,
-    created_at: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now),
-    updated_at: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)
+    observation: Faker::Lorem.sentence
   )
 
   puts "Débito created:"
   puts new_debt.to_s
+end
+
+1000.times do
+  new_payment = Payment.create(
+    person: Person.order("RANDOM()").first,
+    amount: Faker::Number.decimal(l_digits: 2),
+    paid_at: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)
+  )
+
+  puts "Payment created:"
+  puts new_payment.to_s
 end

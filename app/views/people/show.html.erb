@@ -1,14 +1,23 @@
-<%# TODO: refactor DRY %>
 <% if notice.present? %>
-  <div class="alert alert-success">
+  <div class="alert alert-success mb-4" role="alert">
     <%= notice %>
   </div>
 <% end %>
 
-<%= link_to "< Voltar", people_path, class: 'btn btn-secondary btn-sm' %>
+<%= link_to people_path, class: 'btn btn-secondary btn-sm mb-2' do %>
+  <i class="bi bi-arrow-left"></i> Voltar
+<% end %>
 
-<%= render @person %>
-
-<%= link_to 'Editar', edit_person_path(@person), class: "btn btn-primary mb-2" %>
-
-<%= button_to "Remover", @person, method: :delete, class: 'btn btn-danger' %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <%= render @person %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <%= link_to 'Editar', edit_person_path(@person), class: "btn btn-primary mr-2" %>
+      <%= button_to "Remover", @person, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+    </div>
+  </div>
+</div>
